@@ -417,10 +417,9 @@ def single_test_case(config):
         outputdir=config['outputdir'],
     )
 
-
-if __name__ == '__main__':
+def run(args):
     makedirs('Results', exist_ok=True)
-    config = Config.parse_args(argv[1:])
+    config = Config.parse_args(args)
     if config['debug_testcase']:
         single_test_case(config)
         exit(0)
@@ -429,3 +428,9 @@ if __name__ == '__main__':
     t.run()
     tree = TestSuiteTree(executables, name=config['top_level_name'])
     tree.write()
+
+
+
+if __name__ == '__main__':
+    run(argv[1:])
+
