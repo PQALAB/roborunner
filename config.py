@@ -1,6 +1,8 @@
 import argparse
 from robot.api import logger
 
+from os import cpu_count
+
 
 class Config(dict):
 
@@ -86,4 +88,3 @@ class Config(dict):
         """
         self.update(Config.parse_args(args))
         super().__init__(**kwargs)
-
