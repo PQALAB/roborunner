@@ -40,8 +40,8 @@ def single_test_case(config):
     )
 
 def run(args):
-    makedirs('Results', exist_ok=True)
     config = Config.parse_args(args)
+    makedirs(config['Results'], exist_ok=True)
     if config['debug_testcase']:
         single_test_case(config)
         exit(0)
