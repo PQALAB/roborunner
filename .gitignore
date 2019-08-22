@@ -1,8 +1,6 @@
 # Ignore any results
 **__pycache__
-**Results/
 *.vscode
-secrets.robot
 **.DS_Store
 *.pyc
 **/.idea/
@@ -11,5 +9,4 @@ secrets.robot
 **debug-tests/
 *.png
 **build/
-**dist/
 **.egg-info/
