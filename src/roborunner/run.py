@@ -47,6 +47,9 @@ def run(args=None):
     if not args:
         args = sys.argv[1:]
     config = Config.parse_args(args)
+    if not path.exists(config['devices_file']) and not config['local_device']:
+        print('devices file {} does not exist'.format(config['devices_file']))
+        sys.exit(1)
     log_config(config)
     makedirs(config['outputdir'], exist_ok=True)
     devices = BuildDeviceList(config=config).build()

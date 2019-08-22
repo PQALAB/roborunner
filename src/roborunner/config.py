@@ -42,7 +42,7 @@ class Config(dict):
             type=str,
             dest='top_level_name',
             help='Set the top level name for the log and report files',
-            default='MoWeb Smoke Tests'
+            default='Robot Tests'
         )
         parser.add_argument(
             '--suite-stat-level',
