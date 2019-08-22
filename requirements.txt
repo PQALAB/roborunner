@@ -1,6 +1,0 @@
-requests
-selenium
-robotframework
-robotframework-debuglibrary
-robotframework-lint
-robotframework-seleniumlibrary

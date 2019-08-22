@@ -23,47 +23,69 @@ class Config(dict):
             type=str
         )
         parser.add_argument(
-            '--suite_stat_level',
-            help='set the suite_stat_level. This is currently broken',
-            default=2,
-            type=int
-        )
-        parser.add_argument(
-            '--max_processes',
+            '--max-processes',
             type=int,
+            dest='max_processes',
             help='set the maximum number of processes, \
-                defaults to 6 or twice your cpu count. Whichever is higher',
-            default=max(6, cpu_count() * 2)
+                defaults to 4 or twice your cpu count. Whichever is higher.',
+            default=max(4, cpu_count() * 2)
         )
         parser.add_argument(
-            '--local_device',
+            '--local',
             action='store_true',
-            help='Run the test on an Android device attached to the local machine',
+            dest='local_device',
+            help='Run the test on the local machine or a device connected to the local machine',
             default=False
         )
         parser.add_argument(
-            '--top_level_name',
+            '--top-level-name',
             type=str,
+            dest='top_level_name',
             help='Set the top level name for the log and report files',
             default='MoWeb Smoke Tests'
         )
         parser.add_argument(
-            '--debug_testcase',
+            '--suite-stat-level',
             type=str,
-            default='',
-            help='Specify the test case you want to run'
+            dest='suite_stat_level',
+            default=3
         )
         parser.add_argument(
-            '--run_config_file',
+            '--test',
             type=str,
-            help='set the config file with a list of devices',
-            default='run_configs.csv'
+            default=None,
+            dest='debug_testcase',
+            help='Select test cases to run by name or long name. Name\
+                 is case and space insensitive and it can also be a\
+                 simple pattern where `*` matches anything and `?`\
+                 matches any char.'
+        )
+        parser.add_argument(
+            '--devices',
+            type=str,
+            dest='devices_file',
+            help='set the json file containing a list of devices',
+            default='devices.json'
+        )
+        parser.add_argument(
+            '--rerun-failed',
+            action='store_true',
+            dest='rerun_failed',
+            help='Set whether to rerun test suites with failed test cases. Defaults to True',
+            default=False
         )
         parser.add_argument(
             '--outputdir',
             type=str,
             help='directory to output test results',
-            default='Results'
+            default='results'
+        )
+        parser.add_argument(
+            '--include',
+            dest='include_tags',
+            type=str,
+            help='only run these tests with this tag. Accepts * and ? as well.',
+            default=None
         )
         parser.add_argument(
             'test_file_paths',
