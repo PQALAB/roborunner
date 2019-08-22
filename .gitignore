@@ -9,4 +9,5 @@
 **debug-tests/
 *.png
 **build/
+**dist/
 **.egg-info/
