@@ -10,3 +10,6 @@ secrets.robot
 *.swp
 **debug-tests/
 *.png
+**build/
+**dist/
+**.egg-info/

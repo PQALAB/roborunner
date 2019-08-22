@@ -5,8 +5,6 @@ from setuptools import setup, find_packages
 
 VERSION = '1.0.0'
 
-print(find_packages('src'))
-
 setup(
     name             = 'robotframework-roborunner',
     version          = VERSION,
