@@ -3,7 +3,7 @@
 from os.path import abspath, dirname, join
 from setuptools import setup, find_packages
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 setup(
     name             = 'robotframework-roborunner',

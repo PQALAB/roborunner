@@ -23,7 +23,8 @@ from roborunner.log_tree import DeviceLogTree, SuiteLogTree
 
 from robot.api import ResultWriter, logger
 
-from os import makedirs, path
+from os import makedirs, path, getcwd
+from os import system as os_system
 import json
 import sys
 
@@ -61,3 +62,9 @@ def run(args=None):
     tree.write()
     tree = DeviceLogTree(executables, name=config['top_level_name'], config=config)
     tree.write()
+    try:
+        os_system("""
+            osascript -e 'display notification "Tests finished in directory {}" with title "Roborunner"'
+        """.format(getcwd()))
+    except:
+        pass
