@@ -62,19 +62,20 @@ class ExecutableTestSuite(Device):
             stdout = None
             stderr = None
         results = self._run(suite, stdout=stdout, stderr=stderr)
-        return self._determine_rerun(suite, stdout, stderr, results)
+        if self.do_rerun(suite, results):
+            logger.console('{} fail rate > 50%, rerunning test'.format(suite.name))
+            results = self._run(suite, stdout=stdout, stderr=stderr)
+        return results.return_code 
     
-    def _determine_rerun(self, suite, stdout, stderr, results):
+    def do_rerun(self, suite, results):
         if suite.test_count == 0:
             return results.return_code
         fail_rate = (results.return_code / float(suite.test_count))
         if self.config.get('rerun_failed') and fail_rate > 0.5:
-            logger.info('{} fail rate > 50%, rerunning test')
-            results = self._run(suite, stdout=stdout, stderr=stderr)
-        return results.return_code 
+            return True
+        return False
     
     def _run(self, suite, stdout, stderr):
-        assert isinstance(suite, TestSuite)
         return suite.run(
             variable=self.variables,
             output=path.join(self.test_name, self.output),
